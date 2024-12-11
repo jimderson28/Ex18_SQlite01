@@ -16,7 +16,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_COMMENT = "comment";
 
-    private static final String DATABASE_CREATE = "create table"
+    private static final String DATABASE_CREATE = "create  table"
             + TABLE_COMMENTS+"(" + COLUMN_ID
             + " integer primary key autoincrement, " + COLUMN_COMMENT
             + "text not null);";
@@ -37,6 +37,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(DATABASE_CREATE);
         Log.w("jpyMsg",
-                "call onCreate"); 
+                "call onCreate");
     }
 }
