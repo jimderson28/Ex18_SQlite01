@@ -76,4 +76,33 @@ public class CommentsDataSource {
         return comment;
     }
 
+    public Comment addCommentsToSqlite(String comment) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_COMMENT, comment);
+
+        long insertid = database.
+                insert(MySQLiteHelper.TABLE_COMMENTS, null,values);
+        String[] allColumns = {MySQLiteHelper.COLUMN_ID, MySQLiteHelper.COLUMN_COMMENT};
+        Cursor cursor = database.query
+                (MySQLiteHelper.TABLE_COMMENTS,
+                        allColumns, MySQLiteHelper.
+                                COLUMN_ID+ " = " + insertid,null,
+                        null,null,null);
+
+        Comment newcomment = cursorToComment(cursor);
+        cursor.moveToFirst();
+        cursor.close();
+        return newcomment;
+    }
+
+    public void addCommentsToSqlite(Comment comment) {
+        addCommentsToSqlite(comment);
+    }
+
+    public void addCommentsToSqlite(ArrayList<Comment> mList) {
+        for (Comment cm : mList ){
+            addCommentsToSqlite(cm);
+        }
+    }
+
 }
